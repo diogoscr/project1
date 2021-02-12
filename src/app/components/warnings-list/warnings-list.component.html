@@ -1,0 +1,50 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Warnings List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let warning of warnings; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveWarning(warning, i)"
+      >
+        {{ warning.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllWarnings()">
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentWarning">
+      <h4>Warning</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentWarning.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentWarning.description }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/warnings/{{ currentWarning.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentWarning">
+      <br />
+      <p>Please click on a Warning...</p>
+    </div>
+  </div>
+</div>
